@@ -1,5 +1,8 @@
 com\viktor\smd\configuration\WebSecurityConfiguration.class
+com\viktor\smd\controller\SocialMediaController.class
 com\viktor\smd\controller\UserController.class
+com\viktor\smd\service\impl\SocialMediaServiceImpl.class
 com\viktor\smd\repository\UserRepository.class
+com\viktor\smd\service\SocialMediaService.class
 com\viktor\smd\model\User.class
 com\viktor\smd\Application.class

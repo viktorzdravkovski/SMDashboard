@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SMDRestApi/SMDRestApi.iml" filepath="$PROJECT_DIR$/SMDRestApi/SMDRestApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SMDServiceWeb/SMDServiceWeb.iml" filepath="$PROJECT_DIR$/SMDServiceWeb/SMDServiceWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SocialMediaDashboard.iml" filepath="$PROJECT_DIR$/SocialMediaDashboard.iml" />
+    </modules>
+  </component>
+</project>

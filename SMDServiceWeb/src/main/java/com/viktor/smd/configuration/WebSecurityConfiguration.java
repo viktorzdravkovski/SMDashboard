@@ -12,12 +12,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   public void configure(HttpSecurity http) throws Exception {
 
     http.csrf().disable().authorizeRequests()
-        .regexMatchers("/*").permitAll()
-//        .antMatchers("/*").permitAll()
-//        .antMatchers("/swagger-ui.html").permitAll()
-//        .antMatchers("/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config").permitAll()
-//        .antMatchers(HttpMethod.POST, "/demo/add").permitAll()
-//        .antMatchers(HttpMethod.GET, "/demo/all").permitAll()
+        .antMatchers("/*").permitAll()
+        .antMatchers("/swagger-ui.html").permitAll()
+        .antMatchers("/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config").permitAll()
+        .antMatchers(HttpMethod.POST, "/demo/add").permitAll()
+        .antMatchers(HttpMethod.GET, "/demo/all").permitAll()
         .anyRequest().authenticated();
   }
 }

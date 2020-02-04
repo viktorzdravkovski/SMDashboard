@@ -1,37 +1,48 @@
-openapi: 3.0.0
+swagger: "2.0"
 info:
-  title: 'SocialMedia API'
-  description: 'API for Fetching, Saving, Updating and Deleting a social media account'
-  version: '0.1.9'
-servers:
-  - url: 'http://localhost:8080/api/v1'
-    description: 'Development server'
+  description: "API for Fetching, Saving, Updating and Deleting a social media account"
+  version: "1.0.0"
+  title: "SocialMedia API"
+  contact:
+    email: "viktorzdravkovski995@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/api/v1"
+tags:
+  - name: "dashboard"
+    description: "Everything about the social media dashboard"
+schemes:
+  - "https"
+  - "http"
 paths:
   /social-media/accounts:
     get:
       tags:
-        - 'SocialMedia'
-      operationId: 'getSocialMediaAccounts'
-      summary: 'Returns a list of social media accounts.'
-      description: 'Fetch all media accounts from database.'
+        - "SocialMedia"
+      summary: "Returns a list of social media accounts."
+      description: "Fetch all media accounts from database."
+      operationId: "getSocialMediaAccounts"
+      produces:
+        - "application/json"
+      parameters: []
       responses:
-        '200':    # status code
-          description: 'A JSON array of social media accounts'
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Account'
-
-components:
-  schemas:
-    Account:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 1
-        name:
-          type: string
-          example: 'account'
+        200:
+          description: "Status 200 - OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Account"
+        405:
+          description: "Invalid input"
+definitions:
+  Account:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      name:
+        type: string
+        example: 'account'

@@ -1,2 +1,5 @@
 SMDRestApi/target
 SMDServiceWeb/target
+/SMDServiceWeb/target/
+/SMDRestApi/target/
+/.idea/

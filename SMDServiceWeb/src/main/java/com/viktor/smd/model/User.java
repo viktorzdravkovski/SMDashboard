@@ -1,20 +1,39 @@
 package com.viktor.smd.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "auth_user")
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "auth_user_id")
   private Integer id;
 
-  @Column(name = "username")
-  private String username;
+  @Column(name = "first_name")
+  private String firstName;
+
+  @Column(name = "last_name")
+  private String lastName;
 
   @Column(name = "email")
   private String email;
+
+  @Column(name = "password")
+  private String password;
+
+  @Column(name = "status")
+  private String status;
+
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(
+      name = "auth_user_role",
+      joinColumns = @JoinColumn(name = "auth_user_id"),
+      inverseJoinColumns = @JoinColumn(name = "auth_role_id")
+  )
+  private Set<Role> roles;
 
   public Integer getId() {
     return id;
@@ -24,12 +43,20 @@ public class User {
     this.id = id;
   }
 
-  public String getUsername() {
-    return username;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public String getEmail() {
@@ -38,5 +65,29 @@ public class User {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public Set<Role> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(Set<Role> roles) {
+    this.roles = roles;
   }
 }

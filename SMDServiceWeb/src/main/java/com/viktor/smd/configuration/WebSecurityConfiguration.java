@@ -1,71 +1,58 @@
 package com.viktor.smd.configuration;
 
+import com.viktor.smd.filters.JwtRequestFilter;
+import com.viktor.smd.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
-
-import javax.sql.DataSource;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Autowired
-  private DataSource dataSource;
+  private UserDetailsServiceImpl userDetailsService;
 
   @Autowired
-  private BCryptPasswordEncoder passwordEncoder;
-
-  @Value("${spring.queries.users-query}")
-  private String usersQuery;
-
-  @Value("${spring.queries.roles-query}")
-  private String rolesQuery;
+  private JwtRequestFilter jwtRequestFilter;
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-    auth.jdbcAuthentication()
-        .usersByUsernameQuery(usersQuery)
-        .authoritiesByUsernameQuery(rolesQuery)
-        .dataSource(dataSource)
-        .passwordEncoder(passwordEncoder);
+    auth.userDetailsService(userDetailsService);
   }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    http.authorizeRequests()
-        // URLs matching for access rights
-        .mvcMatchers("/").permitAll()
-        .mvcMatchers("/login").permitAll()
-        .mvcMatchers("/register").permitAll()
-        .mvcMatchers("/home/**").hasAnyAuthority("ADMIN", "REGISTERED")
+    http.csrf().disable()
+        .authorizeRequests().antMatchers("/authenticate").permitAll()
         .anyRequest().authenticated()
-        .and()
-        // form login
-        .csrf().disable().formLogin()
-        .loginPage("/login")
-        .failureUrl("/login?error=true")
-        .defaultSuccessUrl("/home")
-        .usernameParameter("email")
-        .passwordParameter("password")
-        .and()
-        // logout
-        .logout()
-        .logoutRequestMatcher(new MvcRequestMatcher(new HandlerMappingIntrospector(), "/logout"))
-        .logoutSuccessUrl("/")
-        .and()
-        .exceptionHandling()
-        .accessDeniedPage("/access-denied");
+        .and().sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+    http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+  }
+
+  @Override
+  @Bean
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
+  }
+
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return NoOpPasswordEncoder.getInstance();
   }
 
   @Override

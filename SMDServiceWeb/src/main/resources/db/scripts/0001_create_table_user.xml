@@ -19,6 +19,9 @@
             <column name="AUTH_ROLE_ID" value="1"/>
             <column name="ROLE_NAME" value="ADMIN"/>
             <column name="ROLE_DESCRIPTION" value="This user has ultimate rights for everything"/>
+        </insert>
+
+        <insert tableName="AUTH_ROLE">
             <column name="AUTH_ROLE_ID" value="2"/>
             <column name="ROLE_NAME" value="REGISTERED"/>
             <column name="ROLE_DESCRIPTION" value="This user has registered rights on site"/>
@@ -39,10 +42,13 @@
             <column name="EMAIL" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="USERNAME" type="VARCHAR2(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
             <column name="PASSWORD" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="STATUS" type="VARCHAR2(255)"/>
+            <column name="ACTIVE" type="BOOLEAN" defaultValue="1"/>
         </createTable>
     </changeSet>
 
@@ -73,8 +79,14 @@
             <column name="FIRST_NAME" value="Viktor"/>
             <column name="LAST_NAME" value="Zdravkovski"/>
             <column name="EMAIL" value="viktorzdravkovski995@gmail.com"/>
+            <column name="USERNAME" value="Viktor"/>
             <column name="PASSWORD" value="Admin123"/>
-            <column name="STATUS" value="VERIFIED"/>
+            <column name="ACTIVE" value="1"/>
+        </insert>
+
+        <insert tableName="AUTH_USER_ROLE">
+            <column name="AUTH_USER_ID" value="1"/>
+            <column name="AUTH_ROLE_ID" value="1"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

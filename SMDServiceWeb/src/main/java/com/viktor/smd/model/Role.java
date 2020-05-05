@@ -3,18 +3,19 @@ package com.viktor.smd.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "auth_role")
+@Table(name = "AUTH_ROLE")
 public class Role {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "auth_role_id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "AUTH_ROLE_ID")
   private int id;
 
-  @Column(name = "role_name")
-  private String roleName;
+  @Column(name = "ROLE_NAME")
+  @Enumerated(EnumType.STRING)
+  private RoleType roleName;
 
-  @Column(name = "role_desc")
+  @Column(name = "ROLE_DESCRIPTION")
   private String roleDescription;
 
   public int getId() {
@@ -25,11 +26,11 @@ public class Role {
     this.id = id;
   }
 
-  public String getRoleName() {
+  public RoleType getRoleName() {
     return roleName;
   }
 
-  public void setRoleName(String roleName) {
+  public void setRoleName(RoleType roleName) {
     this.roleName = roleName;
   }
 

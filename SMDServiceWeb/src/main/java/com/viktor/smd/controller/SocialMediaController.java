@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * REST Controller for the social media accounts API.
+ */
 @RestController
 public class SocialMediaController implements SocialMediaApi {
 

@@ -1,39 +1,53 @@
 package com.viktor.smd.model;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "auth_user")
+@Table(name = "AUTH_USER")
 public class User {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "auth_user_id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "AUTH_USER_ID")
   private Integer id;
 
-  @Column(name = "first_name")
+  @Column(name = "FIRST_NAME")
   private String firstName;
 
-  @Column(name = "last_name")
+  @Column(name = "LAST_NAME")
   private String lastName;
 
-  @Column(name = "email")
+  @Column(name = "EMAIL")
   private String email;
 
-  @Column(name = "password")
+  @Column(name = "USERNAME")
+  private String username;
+
+  @Column(name = "PASSWORD")
   private String password;
 
-  @Column(name = "status")
-  private String status;
+  @Column(name = "ACTIVE")
+  private boolean active;
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinTable(
-      name = "auth_user_role",
-      joinColumns = @JoinColumn(name = "auth_user_id"),
-      inverseJoinColumns = @JoinColumn(name = "auth_role_id")
+      name = "AUTH_USER_ROLE",
+      joinColumns = {@JoinColumn(name = "AUTH_USER_ID")},
+      inverseJoinColumns = {@JoinColumn(name = "AUTH_ROLE_ID")}
   )
-  private Set<Role> roles;
+  private List<Role> roles = new ArrayList<>();
 
   public Integer getId() {
     return id;
@@ -67,6 +81,14 @@ public class User {
     this.email = email;
   }
 
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
   public String getPassword() {
     return password;
   }
@@ -75,19 +97,19 @@ public class User {
     this.password = password;
   }
 
-  public String getStatus() {
-    return status;
+  public boolean isActive() {
+    return active;
   }
 
-  public void setStatus(String status) {
-    this.status = status;
+  public void setActive(boolean active) {
+    this.active = active;
   }
 
-  public Set<Role> getRoles() {
+  public List<Role> getRoles() {
     return roles;
   }
 
-  public void setRoles(Set<Role> roles) {
+  public void setRoles(List<Role> roles) {
     this.roles = roles;
   }
 }

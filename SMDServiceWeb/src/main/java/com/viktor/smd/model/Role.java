@@ -2,6 +2,9 @@ package com.viktor.smd.model;
 
 import javax.persistence.*;
 
+/**
+ * Hibernate entity for AUTH_ROLE.
+ */
 @Entity
 @Table(name = "AUTH_ROLE")
 public class Role {

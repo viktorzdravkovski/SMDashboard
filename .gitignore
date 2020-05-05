@@ -1,5 +1,5 @@
-SMDRestApi/target
-SMDServiceWeb/target
 /SMDServiceWeb/target/
+/SMDServiceWeb/SMDServiceWeb.iml
 /SMDRestApi/target/
+/SMDRestApi/SMDRestApi.iml
 /.idea/

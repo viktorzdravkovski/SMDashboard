@@ -14,6 +14,9 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Hibernate entity for AUTH_USER.
+ */
 @Entity
 @Table(name = "AUTH_USER")
 public class User {

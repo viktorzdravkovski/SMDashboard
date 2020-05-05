@@ -5,18 +5,88 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="0001_01" author="viktor">
-        <createTable tableName="user">
-            <column name="ID" type="bigint">
-                <constraints primaryKey="true"/>
+        <createTable tableName="AUTH_ROLE">
+            <column name="AUTH_ROLE_ID" type="int(11)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="username" type="varchar2(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="email" type="varchar2(50)">
-                <constraints nullable="false" unique="true"/>
-            </column>
+            <column name="ROLE_NAME" type="VARCHAR2(50)" defaultValue="null"/>
+            <column name="ROLE_DESCRIPTION" type="VARCHAR2(255)" defaultValue="null"/>
         </createTable>
     </changeSet>
 
+    <changeSet id="0001_02" author="vzd">
+        <insert tableName="AUTH_ROLE">
+            <column name="AUTH_ROLE_ID" value="1"/>
+            <column name="ROLE_NAME" value="ADMIN"/>
+            <column name="ROLE_DESCRIPTION" value="This user has ultimate rights for everything"/>
+        </insert>
 
+        <insert tableName="AUTH_ROLE">
+            <column name="AUTH_ROLE_ID" value="2"/>
+            <column name="ROLE_NAME" value="REGISTERED"/>
+            <column name="ROLE_DESCRIPTION" value="This user has registered rights on site"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="0001_03" author="vzd">
+        <createTable tableName="AUTH_USER">
+            <column name="AUTH_USER_ID" type="int(11)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR2(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_NAME" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR2(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTIVE" type="BOOLEAN" defaultValue="1"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0001_04" author="vzd">
+        <createTable tableName="AUTH_USER_ROLE">
+            <column name="AUTH_USER_ID" type="int(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AUTH_ROLE_ID" type="int(11)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="AUTH_USER_ROLE" baseColumnNames="AUTH_USER_ID"
+                                 constraintName="FK_AUTH_USER_ID"
+                                 referencedTableName="AUTH_USER"
+                                 referencedColumnNames="AUTH_USER_ID"/>
+
+        <addForeignKeyConstraint baseTableName="AUTH_USER_ROLE" baseColumnNames="AUTH_ROLE_ID"
+                                 constraintName="FK_AUTH_ROLE_ID"
+                                 referencedTableName="AUTH_ROLE"
+                                 referencedColumnNames="AUTH_ROLE_ID"/>
+    </changeSet>
+
+    <changeSet id="0001_05" author="vzd">
+        <insert tableName="AUTH_USER">
+            <column name="AUTH_USER_ID" value="1"/>
+            <column name="FIRST_NAME" value="Viktor"/>
+            <column name="LAST_NAME" value="Zdravkovski"/>
+            <column name="EMAIL" value="viktorzdravkovski995@gmail.com"/>
+            <column name="USERNAME" value="Viktor"/>
+            <column name="PASSWORD" value="Admin123"/>
+            <column name="ACTIVE" value="1"/>
+        </insert>
+
+        <insert tableName="AUTH_USER_ROLE">
+            <column name="AUTH_USER_ID" value="1"/>
+            <column name="AUTH_ROLE_ID" value="1"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

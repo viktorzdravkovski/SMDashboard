@@ -1,8 +1,14 @@
-C:\Users\Viktor Zdravkovski\IdeaProjects\SocialMediaDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\controller\UserController.java
-C:\Users\Viktor Zdravkovski\IdeaProjects\SocialMediaDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\model\User.java
-C:\Users\Viktor Zdravkovski\IdeaProjects\SocialMediaDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\service\SocialMediaService.java
-C:\Users\Viktor Zdravkovski\IdeaProjects\SocialMediaDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\controller\SocialMediaController.java
-C:\Users\Viktor Zdravkovski\IdeaProjects\SocialMediaDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\configuration\WebSecurityConfiguration.java
-C:\Users\Viktor Zdravkovski\IdeaProjects\SocialMediaDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\Application.java
-C:\Users\Viktor Zdravkovski\IdeaProjects\SocialMediaDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\repository\UserRepository.java
-C:\Users\Viktor Zdravkovski\IdeaProjects\SocialMediaDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\service\impl\SocialMediaServiceImpl.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\model\RoleType.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\repository\RepositoryMarkerInterface.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\service\impl\UserDetailsServiceImpl.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\model\User.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\controller\SocialMediaController.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\repository\UserRepository.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\model\Role.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\resource\UserDetailsResource.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\service\impl\SocialMediaServiceImpl.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\controller\TestController.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\service\SocialMediaService.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\configuration\WebSecurityConfiguration.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\Application.java
+C:\Users\vzdravko\Documents\Projects\SMDashboard\SMDServiceWeb\src\main\java\com\viktor\smd\repository\RoleRepository.java

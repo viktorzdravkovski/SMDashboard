@@ -1,5 +1,8 @@
 package com.viktor.ttt.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,13 +47,23 @@ public class User {
   @Column(name = "ACTIVE")
   private boolean active;
 
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(
       name = "AUTH_USER_ROLE",
       joinColumns = {@JoinColumn(name = "AUTH_USER_ID")},
       inverseJoinColumns = {@JoinColumn(name = "AUTH_ROLE_ID")}
   )
   private List<Role> roles = new ArrayList<>();
+
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(
+      name = "USER_TASK",
+      joinColumns = {@JoinColumn(name = "AUTH_USER_ID")},
+      inverseJoinColumns = {@JoinColumn(name = "TASK_ID")}
+      )
+  public List<Task> tasks = new ArrayList<>();
 
   public Integer getId() {
     return id;
@@ -114,5 +127,13 @@ public class User {
 
   public void setRoles(List<Role> roles) {
     this.roles = roles;
+  }
+
+  public List<Task> getTasks() {
+    return tasks;
+  }
+
+  public void setTasks(List<Task> tasks) {
+    this.tasks = tasks;
   }
 }

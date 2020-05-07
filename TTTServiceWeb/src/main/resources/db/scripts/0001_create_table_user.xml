@@ -14,7 +14,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="0001_02" author="vzd">
+    <changeSet id="0001_02" author="viktor">
         <insert tableName="AUTH_ROLE">
             <column name="AUTH_ROLE_ID" value="1"/>
             <column name="ROLE_NAME" value="ADMIN"/>
@@ -28,7 +28,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="0001_03" author="vzd">
+    <changeSet id="0001_03" author="viktor">
         <createTable tableName="AUTH_USER">
             <column name="AUTH_USER_ID" type="int(11)" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
@@ -52,7 +52,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="0001_04" author="vzd">
+    <changeSet id="0001_04" author="viktor">
         <createTable tableName="AUTH_USER_ROLE">
             <column name="AUTH_USER_ID" type="int(11)">
                 <constraints nullable="false"/>
@@ -73,7 +73,7 @@
                                  referencedColumnNames="AUTH_ROLE_ID"/>
     </changeSet>
 
-    <changeSet id="0001_05" author="vzd">
+    <changeSet id="0001_05" author="viktor">
         <insert tableName="AUTH_USER">
             <column name="AUTH_USER_ID" value="1"/>
             <column name="FIRST_NAME" value="Viktor"/>
@@ -84,25 +84,29 @@
             <column name="ACTIVE" value="1"/>
         </insert>
 
+        <insert tableName="AUTH_USER">
+            <column name="AUTH_USER_ID" value="2"/>
+            <column name="FIRST_NAME" value="Test"/>
+            <column name="LAST_NAME" value="Testerson"/>
+            <column name="EMAIL" value="test@gmail.com"/>
+            <column name="USERNAME" value="test"/>
+            <column name="PASSWORD" value="test"/>
+            <column name="ACTIVE" value="1"/>
+        </insert>
+
         <insert tableName="AUTH_USER_ROLE">
             <column name="AUTH_USER_ID" value="1"/>
             <column name="AUTH_ROLE_ID" value="1"/>
         </insert>
-    </changeSet>
 
-    <changeSet id="0001_06" author="vzd">
-        <createTable tableName="USERCONNECTION">
-            <column name="userId" type="VARCHAR2(255)"/>
-            <column name="providerId" type="VARCHAR2(255)"/>
-            <column name="providerUserId" type="VARCHAR2(255)"/>
-            <column name="displayName" type="VARCHAR2(255)"/>
-            <column name="profileUrl" type="VARCHAR2(255)"/>
-            <column name="imageUrl" type="VARCHAR2(255)"/>
-            <column name="accessToken" type="VARCHAR2(255)"/>
-            <column name="secret" type="VARCHAR2(255)"/>
-            <column name="refreshToken" type="VARCHAR2(255)"/>
-            <column name="expireTime" type="VARCHAR2(255)"/>
-            <column name="rank" type="VARCHAR2(255)"/>
-        </createTable>
+        <insert tableName="AUTH_USER_ROLE">
+            <column name="AUTH_USER_ID" value="1"/>
+            <column name="AUTH_ROLE_ID" value="2"/>
+        </insert>
+
+        <insert tableName="AUTH_USER_ROLE">
+            <column name="AUTH_USER_ID" value="2"/>
+            <column name="AUTH_ROLE_ID" value="2"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

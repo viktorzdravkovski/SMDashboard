@@ -1,0 +1,68 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="0002_01" author="viktor">
+        <createTable tableName="TASK">
+            <column name="TASK_ID" type="int(11)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="TASK_NAME" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TASK_DESCRIPTION" type="VARCHAR2(255)" defaultValue="null"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0002_02" author="viktor">
+        <createTable tableName="USER_TASK">
+            <column name="AUTH_USER_ID" type="int(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TASK_ID" type="int(11)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="USER_TASK" baseColumnNames="AUTH_USER_ID"
+                                 constraintName="FK_USER_TASK_ID"
+                                 referencedTableName="AUTH_USER"
+                                 referencedColumnNames="AUTH_USER_ID"/>
+
+        <addForeignKeyConstraint baseTableName="USER_TASK" baseColumnNames="TASK_ID"
+                                 constraintName="FK_TASK_ID"
+                                 referencedTableName="TASK"
+                                 referencedColumnNames="TASK_ID"/>
+    </changeSet>
+
+    <changeSet id="0002_03" author="viktor">
+        <insert tableName="TASK">
+            <column name="TASK_ID" value="1"/>
+            <column name="TASK_NAME" value="TestTask1"/>
+            <column name="TASK_DESCRIPTION" value="Test description for task1."/>
+        </insert>
+
+        <insert tableName="TASK">
+            <column name="TASK_ID" value="2"/>
+            <column name="TASK_NAME" value="TestTask2"/>
+            <column name="TASK_DESCRIPTION" value="Test description for task2."/>
+        </insert>
+
+        <insert tableName="USER_TASK">
+            <column name="AUTH_USER_ID" value="1"/>
+            <column name="TASK_ID" value="1"/>
+        </insert>
+
+        <insert tableName="USER_TASK">
+            <column name="AUTH_USER_ID" value="1"/>
+            <column name="TASK_ID" value="2"/>
+        </insert>
+
+        <insert tableName="USER_TASK">
+            <column name="AUTH_USER_ID" value="2"/>
+            <column name="TASK_ID" value="2"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

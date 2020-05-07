@@ -1,0 +1,48 @@
+swagger: "2.0"
+info:
+  description: "API for Fetching, Saving, Updating and Deleting tasks"
+  version: "1.0.0"
+  title: "TaskTrackingTool API"
+  contact:
+    email: "viktorzdravkovski995@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/api/v1"
+tags:
+  - name: "tttool"
+    description: "Everything about the task tracking tool"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /task-tracker/tasks:
+    get:
+      tags:
+        - "TaskTracker"
+      summary: "Returns a list of tasks."
+      description: "Fetch all tasks from database."
+      operationId: "getTasks"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200 - OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Task"
+        405:
+          description: "Invalid input"
+definitions:
+  Task:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      name:
+        type: string
+        example: 'account'

@@ -1,2 +1,2 @@
-# SMDashboard
-Social media dashboard for all of your social accounts.
+# TaskTrackerTool
+A tool used for tracking tasks between users.

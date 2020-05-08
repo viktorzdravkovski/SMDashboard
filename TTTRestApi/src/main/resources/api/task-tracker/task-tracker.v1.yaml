@@ -17,32 +17,164 @@ schemes:
   - "https"
   - "http"
 paths:
-  /task-tracker/tasks:
+  /task-tracker/task:
     get:
       tags:
-        - "TaskTracker"
-      summary: "Returns a list of tasks."
-      description: "Fetch all tasks from database."
-      operationId: "getTasks"
+        - 'TaskTracker'
+      summary: 'Returns a list of tasks.'
+      description: 'Fetch all tasks from database.'
+      operationId: 'getTasks'
       produces:
-        - "application/json"
+        - 'application/json'
       parameters: []
       responses:
         200:
-          description: "Status 200 - OK"
+          description: 'Status 200 - Response OK'
           schema:
-            type: "array"
+            type: 'array'
             items:
-              $ref: "#/definitions/Task"
+              $ref: '#/definitions/Task'
         405:
-          description: "Invalid input"
+          description: 'Invalid input'
+    post:
+      tags:
+        - 'TaskTracker'
+      summary: 'Add a task'
+      description: 'Add a new task in database'
+      operationId: 'addTask'
+      consumes:
+        - 'application/json'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddTaskRequestBody'
+      responses:
+        200:
+          description: 'Status 200 - Response OK'
+          schema:
+            $ref: '#/definitions/AddTaskConfirmation'
+        403:
+          description: 'Status 403 - Access unauthorized'
+
+  /task-tracker/task/{id}:
+    get:
+      tags:
+        - 'TaskTracker'
+      summary: 'Return a task by id'
+      description: 'Fetch a task by id'
+      operationId: 'getTask'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: 'id of task'
+          required: true
+      responses:
+        200:
+          description: 'Status 200 - Response OK'
+          schema:
+            $ref: '#/definitions/Task'
+        403:
+          description: 'Status 403 - Access forbidden'
+    delete:
+      tags:
+        - 'TaskTracker'
+      summary: 'Delete a task'
+      description: 'Delete a task'
+      operationId: 'deleteTask'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: 'id of task'
+          required: true
+      responses:
+        200:
+          description: 'Status 200 - Response OK'
+          schema:
+            $ref: '#/definitions/DeleteTaskConfirmation'
+        403:
+          description: 'Status 403 - Access forbidden'
+
 definitions:
   Task:
+    title: 'Task'
     type: object
     properties:
-      id:
-        type: integer
-        example: 1
       name:
+        title: 'Name'
         type: string
-        example: 'account'
+        example: 'Task'
+      description:
+        title: 'Description'
+        type: string
+        example: 'This is some description for the task'
+      assignedUsers:
+        title: 'AssignedUsers'
+        type: array
+        items:
+          $ref: '#/definitions/User'
+
+  User:
+    title: 'User'
+    type: object
+    properties:
+      fullName:
+        title: 'FullName'
+        type: string
+        example: 'Full Name'
+      email:
+        title: 'EMail'
+        type: string
+        example: 'example@example.com'
+      username:
+        title: 'Username'
+        type: string
+        example: 'userName'
+
+  AddTaskRequestBody:
+    title: 'AddTaskRequestBody'
+    type: object
+    properties:
+      task:
+        $ref: '#/definitions/TaskRequestBody'
+
+  TaskRequestBody:
+    title: 'TaskRequestBody'
+    type: object
+    properties:
+      taskName:
+        title: 'TaskName'
+        type: string
+        example: 'taskName'
+      taskDescription:
+        title: 'TitleDescription'
+        type: string
+        example: 'Task Description'
+      assignedUsernames:
+        title: 'AssignedUsernames'
+        type: array
+        items:
+          type: string
+
+  AddTaskConfirmation:
+    title: 'AddTaskConfirmation'
+    type: object
+    properties:
+      message:
+        title: 'Message'
+        type: string
+
+  DeleteTaskConfirmation:
+    title: 'DeleteTaskConfirmation'
+    type: object
+    properties:
+      message:
+        title: 'Message'
+        type: string

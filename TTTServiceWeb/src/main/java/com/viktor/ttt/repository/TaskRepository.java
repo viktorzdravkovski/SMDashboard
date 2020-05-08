@@ -1,12 +1,12 @@
 package com.viktor.ttt.repository;
 
-import com.viktor.ttt.model.Role;
+import com.viktor.ttt.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Jpa Repository for {@link Role}.
+ * Jpa repository for {@link Task}.
  */
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Integer> {
+public interface TaskRepository extends JpaRepository<Task, Integer> {
 }

@@ -1,9 +1,13 @@
 package com.viktor.ttt.util;
 
+import com.viktor.ttt.model.UserDetails;
 import com.viktor.ttt.taskTracker.v1.model.Task;
 import com.viktor.ttt.taskTracker.v1.model.TaskRequestBody;
 import com.viktor.ttt.taskTracker.v1.model.User;
 
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,16 +87,23 @@ public final class TasksMapperFactory {
   private static List<User> mapUserResourceListFromModelList(List<com.viktor.ttt.model.User> userList) {
     return userList.stream()
         .map(user -> {
-          String email = user.getEmail();
-          String firstName = user.getFirstName();
-          String lastName = user.getLastName();
+          UserDetails userDetails = user.getUserDetails();
           String username = user.getUsername();
+          String firstName = userDetails.getFirstName();
+          String lastName = userDetails.getLastName();
           String fullName = String.format("%s %s", firstName, lastName);
+          String email = userDetails.getEmail();
+          String address = userDetails.getAddress();
+          LocalDate dateOfBirth = userDetails.getDateOfBirth();
+          OffsetDateTime createdAt = userDetails.getCreatedAt();
 
           User userResource = new User();
           userResource.setEmail(email);
           userResource.setFullName(fullName);
           userResource.setUsername(username);
+          userResource.setAddress(address);
+          userResource.setDateOfBirth(dateOfBirth);
+          userResource.setCreatedAt(createdAt);
 
           return userResource;
         })

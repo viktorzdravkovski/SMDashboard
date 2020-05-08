@@ -48,7 +48,7 @@ public class User {
   private boolean active;
 
   @LazyCollection(LazyCollectionOption.FALSE)
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.MERGE)
   @JoinTable(
       name = "AUTH_USER_ROLE",
       joinColumns = {@JoinColumn(name = "AUTH_USER_ID")},
@@ -57,7 +57,7 @@ public class User {
   private List<Role> roles = new ArrayList<>();
 
   @LazyCollection(LazyCollectionOption.FALSE)
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.MERGE)
   @JoinTable(
       name = "USER_TASK",
       joinColumns = {@JoinColumn(name = "AUTH_USER_ID")},

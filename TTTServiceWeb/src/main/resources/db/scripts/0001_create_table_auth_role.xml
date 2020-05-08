@@ -1,0 +1,30 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="0001_01" author="viktor">
+        <createTable tableName="AUTH_ROLE">
+            <column name="AUTH_ROLE_ID" type="int(11)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_NAME" type="VARCHAR2(50)" defaultValue="null"/>
+            <column name="ROLE_DESCRIPTION" type="VARCHAR2(255)" defaultValue="null"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0001_02" author="viktor">
+        <insert tableName="AUTH_ROLE">
+            <column name="AUTH_ROLE_ID" value="1"/>
+            <column name="ROLE_NAME" value="ADMIN"/>
+            <column name="ROLE_DESCRIPTION" value="This user has ultimate rights for everything"/>
+        </insert>
+
+        <insert tableName="AUTH_ROLE">
+            <column name="AUTH_ROLE_ID" value="2"/>
+            <column name="ROLE_NAME" value="REGISTERED"/>
+            <column name="ROLE_DESCRIPTION" value="This user has registered rights on site"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

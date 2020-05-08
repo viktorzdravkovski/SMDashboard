@@ -1,0 +1,29 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="0003_01" author="viktor">
+        <createTable tableName="AUTH_USER_ROLE">
+            <column name="AUTH_USER_ID" type="int(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AUTH_ROLE_ID" type="int(11)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="AUTH_USER_ROLE"
+                                 baseColumnNames="AUTH_USER_ID"
+                                 constraintName="FK_AUTH_USER_ID"
+                                 referencedTableName="AUTH_USER"
+                                 referencedColumnNames="AUTH_USER_ID"/>
+
+        <addForeignKeyConstraint baseTableName="AUTH_USER_ROLE"
+                                 baseColumnNames="AUTH_ROLE_ID"
+                                 constraintName="FK_AUTH_ROLE_ID"
+                                 referencedTableName="AUTH_ROLE"
+                                 referencedColumnNames="AUTH_ROLE_ID"/>
+    </changeSet>
+</databaseChangeLog>

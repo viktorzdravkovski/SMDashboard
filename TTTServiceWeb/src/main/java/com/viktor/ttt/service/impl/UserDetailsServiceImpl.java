@@ -3,7 +3,6 @@ package com.viktor.ttt.service.impl;
 import com.viktor.ttt.model.User;
 import com.viktor.ttt.repository.UserRepository;
 import com.viktor.ttt.resource.UserDetailsResource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,8 +16,16 @@ import java.util.Optional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-  @Autowired
   private UserRepository userRepository;
+
+  /**
+   * The constructor with the mandatory parameter.
+   *
+   * @param userRepository the user repository.
+   */
+  public UserDetailsServiceImpl(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

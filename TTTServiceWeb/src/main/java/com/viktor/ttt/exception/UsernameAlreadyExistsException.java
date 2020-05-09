@@ -1,9 +1,9 @@
-package com.viktor.ttt.service.exception;
+package com.viktor.ttt.exception;
 
 /**
  * Exception for when a username is already taken.
  */
-public class UsernameAlreadyExistsException extends Throwable {
+public class UsernameAlreadyExistsException extends RuntimeException {
 
   /**
    * The constructor with the mandatory parameter.

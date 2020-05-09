@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * REST Controller for the social media accounts API.
+ * The REST Controller for the Task Tracker API.
  */
 @RestController
 public class TaskTrackerController implements TaskTrackerApi {

@@ -8,7 +8,7 @@ import com.viktor.ttt.repository.RoleRepository;
 import com.viktor.ttt.repository.UserRepository;
 import com.viktor.ttt.resource.AuthenticationResponse;
 import com.viktor.ttt.service.UserAuthenticationService;
-import com.viktor.ttt.service.exception.UsernameAlreadyExistsException;
+import com.viktor.ttt.exception.UsernameAlreadyExistsException;
 import com.viktor.ttt.util.UserMapperFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

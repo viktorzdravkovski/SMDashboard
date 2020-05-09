@@ -3,17 +3,15 @@ package com.viktor.ttt.controller;
 import com.viktor.ttt.dto.UserDto;
 import com.viktor.ttt.resource.AuthenticationResponse;
 import com.viktor.ttt.service.UserAuthenticationService;
-import com.viktor.ttt.service.exception.UsernameAlreadyExistsException;
-import com.viktor.ttt.util.ResponseMessageFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The controller for user authentication.
+ * The REST controller for user authentication.
  */
-@Controller
+@RestController
 @RequestMapping("authenticate")
 public class UserAuthenticationController {
 
@@ -30,11 +28,7 @@ public class UserAuthenticationController {
 
   @PostMapping("/register")
   public ResponseEntity<AuthenticationResponse> register(UserDto userDto) {
-    try {
-      AuthenticationResponse response = userAuthenticationService.registerUser(userDto);
-      return ResponseEntity.ok(response);
-    } catch (UsernameAlreadyExistsException e) {
-      return ResponseEntity.badRequest().body(ResponseMessageFactory.createUsernameAlreadyExistsResponseMessage());
-    }
+    AuthenticationResponse response = userAuthenticationService.registerUser(userDto);
+    return ResponseEntity.ok(response);
   }
 }

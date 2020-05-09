@@ -3,6 +3,7 @@ package com.viktor.ttt.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -32,18 +33,24 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     http.csrf().disable()
         .authorizeRequests()
         .antMatchers("/authenticate/register").permitAll()
-        .antMatchers("login").permitAll()
-        .antMatchers("/**").hasAnyAuthority("REGISTERED", "ADMIN")
-        .and().formLogin();
+        .antMatchers("/authenticate/login").permitAll()
+        .antMatchers("/**").hasAnyAuthority("REGISTERED", "ADMIN");
   }
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("/h2-console/**");
+    web.ignoring()
+        .antMatchers("/h2-console/**");
   }
 
   @Bean
   public PasswordEncoder getPasswordEncoder() {
     return NoOpPasswordEncoder.getInstance();
+  }
+
+  @Bean
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
   }
 }

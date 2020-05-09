@@ -3,6 +3,7 @@ package com.viktor.ttt.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -45,5 +46,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Bean
   public PasswordEncoder getPasswordEncoder() {
     return NoOpPasswordEncoder.getInstance();
+  }
+
+  @Bean
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
   }
 }

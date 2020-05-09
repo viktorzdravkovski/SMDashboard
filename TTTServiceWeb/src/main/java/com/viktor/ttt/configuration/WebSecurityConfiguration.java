@@ -32,14 +32,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     http.csrf().disable()
         .authorizeRequests()
         .antMatchers("/authenticate/register").permitAll()
-        .antMatchers("login").permitAll()
-        .antMatchers("/**").hasAnyAuthority("REGISTERED", "ADMIN")
-        .and().formLogin();
+        .antMatchers("/authenticate/login").permitAll()
+        .antMatchers("/**").hasAnyAuthority("REGISTERED", "ADMIN");
   }
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("/h2-console/**");
+    web.ignoring()
+        .antMatchers("/h2-console/**");
   }
 
   @Bean

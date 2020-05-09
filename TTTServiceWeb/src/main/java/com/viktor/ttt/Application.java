@@ -13,6 +13,5 @@ public class Application {
     SpringApplication.run(Application.class, args);
   }
 }
-// TODO vzdravko 2020-05-09: 1. Global Exception Handling
 // TODO vzdravko 2020-05-09: 2. Login
 // TODO vzdravko 2020-05-09: 3. Comments table

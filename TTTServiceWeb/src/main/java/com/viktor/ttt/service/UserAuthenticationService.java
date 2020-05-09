@@ -2,7 +2,7 @@ package com.viktor.ttt.service;
 
 import com.viktor.ttt.dto.UserDto;
 import com.viktor.ttt.resource.AuthenticationResponse;
-import com.viktor.ttt.service.exception.UsernameAlreadyExistsException;
+import com.viktor.ttt.exception.UsernameAlreadyExistsException;
 
 /**
  * Service for logging in and registering the user.

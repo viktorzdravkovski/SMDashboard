@@ -31,33 +31,16 @@ public class TaskTrackerController implements TaskTrackerApi {
     this.taskTrackingService = taskTrackingService;
   }
 
-  /**
-   * Fetch all tasks from db.
-   *
-   * @return a list of {@link Task}.
-   */
   @Override
   public ResponseEntity<List<Task>> getTasks() {
     return ResponseEntity.ok(taskTrackingService.getAllTasks());
   }
 
-  /**
-   * Get a task by id.
-   *
-   * @param id the id of the task.
-   * @return the {@link Task}.
-   */
   @Override
   public ResponseEntity<Task> getTask(@PathVariable String id) {
     return ResponseEntity.ok(taskTrackingService.getTask(id));
   }
 
-  /**
-   * Add a task.
-   *
-   * @param body the request body.
-   * @return confirmation message.
-   */
   @Override
   public ResponseEntity<AddTaskConfirmation> addTask(@RequestBody AddTaskRequestBody body) {
     TaskRequestBody task = body.getTask();

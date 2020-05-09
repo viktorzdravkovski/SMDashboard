@@ -1,0 +1,53 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="0005_01" author="viktor">
+        <insert tableName="USER_DETAILS">
+            <column name="ID" value="1"/>
+            <column name="FIRST_NAME" value="Viktor"/>
+            <column name="LAST_NAME" value="Zdravkovski"/>
+            <column name="EMAIL" value="viktorzdravkovski995@gmail.com"/>
+        </insert>
+
+        <insert tableName="AUTH_USER">
+            <column name="AUTH_USER_ID" value="1"/>
+            <column name="USERNAME" value="Viktor"/>
+            <column name="PASSWORD" value="Admin123"/>
+            <column name="ACTIVE" value="1"/>
+            <column name="FK_USER_DETAILS_ID" value="1"/>
+        </insert>
+
+        <insert tableName="USER_DETAILS">
+            <column name="ID" value="2"/>
+            <column name="FIRST_NAME" value="Test"/>
+            <column name="LAST_NAME" value="Testerson"/>
+            <column name="EMAIL" value="test@gmail.com"/>
+        </insert>
+
+        <insert tableName="AUTH_USER">
+            <column name="AUTH_USER_ID" value="2"/>
+            <column name="USERNAME" value="test"/>
+            <column name="PASSWORD" value="test"/>
+            <column name="ACTIVE" value="1"/>
+            <column name="FK_USER_DETAILS_ID" value="2"/>
+        </insert>
+
+        <insert tableName="AUTH_USER_ROLE">
+            <column name="AUTH_USER_ID" value="1"/>
+            <column name="AUTH_ROLE_ID" value="1"/>
+        </insert>
+
+        <insert tableName="AUTH_USER_ROLE">
+            <column name="AUTH_USER_ID" value="1"/>
+            <column name="AUTH_ROLE_ID" value="2"/>
+        </insert>
+
+        <insert tableName="AUTH_USER_ROLE">
+            <column name="AUTH_USER_ID" value="2"/>
+            <column name="AUTH_ROLE_ID" value="2"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

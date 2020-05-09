@@ -137,6 +137,22 @@ definitions:
         title: 'Username'
         type: string
         example: 'userName'
+      address:
+        title: 'Address'
+        type: string
+        example: 'Wall St.'
+      dateOfBirth:
+        title: 'DateOfBirth'
+        type: string
+        format: date
+      createdAt:
+        title: 'CreatedAt'
+        type: string
+        format: 'date-time'
+    required:
+      - fullName
+      - email
+      - username
 
   AddTaskRequestBody:
     title: 'AddTaskRequestBody'

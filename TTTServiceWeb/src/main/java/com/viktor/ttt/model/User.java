@@ -6,13 +6,13 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +29,6 @@ public class User {
   @Column(name = "AUTH_USER_ID")
   private Integer id;
 
-  @Column(name = "FIRST_NAME")
-  private String firstName;
-
-  @Column(name = "LAST_NAME")
-  private String lastName;
-
-  @Column(name = "EMAIL")
-  private String email;
-
   @Column(name = "USERNAME")
   private String username;
 
@@ -46,6 +37,14 @@ public class User {
 
   @Column(name = "ACTIVE")
   private boolean active;
+
+  @OneToOne(
+      targetEntity = UserDetails.class,
+      cascade = CascadeType.ALL,
+      orphanRemoval = true
+  )
+  @JoinColumn(name = "FK_USER_DETAILS_ID")
+  private UserDetails userDetails;
 
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToMany(cascade = CascadeType.MERGE)
@@ -62,7 +61,7 @@ public class User {
       name = "USER_TASK",
       joinColumns = {@JoinColumn(name = "AUTH_USER_ID")},
       inverseJoinColumns = {@JoinColumn(name = "TASK_ID")}
-      )
+  )
   public List<Task> tasks = new ArrayList<>();
 
   public Integer getId() {
@@ -73,28 +72,12 @@ public class User {
     this.id = id;
   }
 
-  public String getFirstName() {
-    return firstName;
+  public UserDetails getUserDetails() {
+    return userDetails;
   }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
+  public void setUserDetails(UserDetails userDetails) {
+    this.userDetails = userDetails;
   }
 
   public String getUsername() {

@@ -1,9 +1,9 @@
 package com.viktor.ttt.util;
 
-import com.viktor.ttt.dto.UserDto;
 import com.viktor.ttt.model.Role;
 import com.viktor.ttt.model.User;
 import com.viktor.ttt.model.UserDetails;
+import com.viktor.ttt.taskTracker.v1.model.RegisterUserRequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,17 +23,17 @@ public final class UserMapperFactory {
   /**
    * Maps a user from the User dto.
    *
-   * @param userDto  the user dto.
-   * @param roleList the list of roles.
+   * @param userRequestBody the user request body.
+   * @param roleList        the list of roles.
    * @return a mapped {@link User}.
    */
-  public static User mapUserFromUserDto(UserDto userDto, List<Role> roleList) {
+  public static User mapUserFromRegisterUserRequest(RegisterUserRequestBody userRequestBody, List<Role> roleList) {
 
-    String firstName = userDto.getName();
-    String lastName = userDto.getLastName();
-    String email = userDto.getEmail();
-    String username = userDto.getUsername();
-    String password = userDto.getPassword();
+    String firstName = userRequestBody.getFirstName();
+    String lastName = userRequestBody.getLastName();
+    String email = userRequestBody.getEmail();
+    String username = userRequestBody.getUsername();
+    String password = userRequestBody.getPassword();
 
     UserDetails userDetails = new UserDetails();
     userDetails.setFirstName(firstName);

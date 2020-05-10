@@ -1,9 +1,10 @@
 package com.viktor.ttt.service;
 
-import com.viktor.ttt.dto.UserDto;
-import com.viktor.ttt.dto.UserLoginDto;
-import com.viktor.ttt.resource.AuthenticationResponse;
 import com.viktor.ttt.exception.UsernameAlreadyExistsException;
+import com.viktor.ttt.taskTracker.v1.model.LoginConfirmation;
+import com.viktor.ttt.taskTracker.v1.model.LoginUserRequestBody;
+import com.viktor.ttt.taskTracker.v1.model.RegisterUserRequestBody;
+import com.viktor.ttt.taskTracker.v1.model.RegistrationConfirmation;
 
 /**
  * Service for logging in and registering the user.
@@ -13,17 +14,18 @@ public interface UserAuthenticationService {
   /**
    * Registers the received user.
    *
-   * @param userDto the user dto.
-   * @return {@link AuthenticationResponse}.
+   * @param registerUserRequestBody the register user request body.
+   * @return {@link RegistrationConfirmation}.
    * @throws {@link UsernameAlreadyExistsException}.
    */
-  AuthenticationResponse registerUser(UserDto userDto) throws UsernameAlreadyExistsException;
+  RegistrationConfirmation registerUser(RegisterUserRequestBody registerUserRequestBody)
+      throws UsernameAlreadyExistsException;
 
   /**
    * Login for the user.
    *
-   * @param userLoginDto the user login dto.
-   * @return {@link AuthenticationResponse}.
+   * @param loginUserRequestBody the login user request body.
+   * @return {@link LoginConfirmation}.
    */
-  AuthenticationResponse loginUser(UserLoginDto userLoginDto);
+  LoginConfirmation loginUser(LoginUserRequestBody loginUserRequestBody);
 }

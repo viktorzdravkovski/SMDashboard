@@ -1,15 +1,16 @@
 package com.viktor.ttt.service.impl;
 
-import com.viktor.ttt.dto.UserDto;
-import com.viktor.ttt.dto.UserLoginDto;
 import com.viktor.ttt.model.Role;
 import com.viktor.ttt.model.RoleType;
 import com.viktor.ttt.model.User;
 import com.viktor.ttt.repository.RoleRepository;
 import com.viktor.ttt.repository.UserRepository;
-import com.viktor.ttt.resource.AuthenticationResponse;
 import com.viktor.ttt.service.UserAuthenticationService;
 import com.viktor.ttt.exception.UsernameAlreadyExistsException;
+import com.viktor.ttt.taskTracker.v1.model.LoginConfirmation;
+import com.viktor.ttt.taskTracker.v1.model.LoginUserRequestBody;
+import com.viktor.ttt.taskTracker.v1.model.RegisterUserRequestBody;
+import com.viktor.ttt.taskTracker.v1.model.RegistrationConfirmation;
 import com.viktor.ttt.util.UserMapperFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -49,28 +50,28 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
   }
 
   @Override
-  public AuthenticationResponse registerUser(UserDto userDto) throws UsernameAlreadyExistsException {
+  public RegistrationConfirmation registerUser(RegisterUserRequestBody body) throws UsernameAlreadyExistsException {
 
-    String username = userDto.getUsername();
+    String username = body.getUsername();
     Optional<User> optionalUser = userRepository.findByUsername(username);
     if (optionalUser.isPresent()) {
       throw new UsernameAlreadyExistsException(username);
     }
 
     Role role = roleRepository.getRoleByRoleName(RoleType.REGISTERED);
-    User user = UserMapperFactory.mapUserFromUserDto(userDto, Collections.singletonList(role));
+    User user = UserMapperFactory.mapUserFromRegisterUserRequest(body, Collections.singletonList(role));
 
     userRepository.save(user);
 
-    AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-    authenticationResponse.setMessage("User registered successfully");
-    authenticationResponse.setStatus(HttpStatus.OK);
+    RegistrationConfirmation registrationConfirmation = new RegistrationConfirmation();
+    registrationConfirmation.setMessage("Registration successful");
+    registrationConfirmation.setStatus(HttpStatus.OK.value());
 
-    return authenticationResponse;
+    return registrationConfirmation;
   }
 
   @Override
-  public AuthenticationResponse loginUser(UserLoginDto userLoginDto) {
+  public LoginConfirmation loginUser(LoginUserRequestBody userLoginDto) {
 
     UsernamePasswordAuthenticationToken authenticationToken =
         new UsernamePasswordAuthenticationToken(userLoginDto.getUsername(), userLoginDto.getPassword());
@@ -80,11 +81,11 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
       SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-    AuthenticationResponse response = new AuthenticationResponse();
-    response.setMessage("User login successfully");
-    response.setStatus(HttpStatus.OK);
+    LoginConfirmation loginConfirmation = new LoginConfirmation();
+    loginConfirmation.setMessage("Login successful");
+    loginConfirmation.setStatus(HttpStatus.OK.value());
 
-    return response;
+    return loginConfirmation;
   }
 
   private boolean isAuthenticated(Authentication authentication) {

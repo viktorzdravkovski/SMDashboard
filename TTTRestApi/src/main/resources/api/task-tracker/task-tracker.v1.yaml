@@ -102,11 +102,61 @@ paths:
         403:
           description: 'Status 403 - Access forbidden'
 
+  /task-tracker/comment:
+    post:
+      tags:
+        - 'TaskTracker'
+      summary: 'Add a comment'
+      description: 'Add a comment'
+      operationId: 'addComment'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddCommentRequestBody'
+      responses:
+        200:
+          description: 'Status 200 - Response OK'
+          schema:
+            $ref: '#/definitions/AddCommentConfirmation'
+        403:
+          description: 'Status 403 - Access forbidden'
+
+  /task-tracker/comment/{id}:
+    delete:
+      tags:
+        - 'TaskTracker'
+      summary: 'Delete a comment'
+      description: 'Delete a comment'
+      operationId: 'deleteComment'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: 'id of comment'
+          required: true
+      responses:
+        200:
+          description: 'Status 200 - Response OK'
+          schema:
+            $ref: '#/definitions/DeleteCommentConfirmation'
+        403:
+          description: 'Status 403 - Access forbidden'
+
 definitions:
   Task:
     title: 'Task'
     type: object
     properties:
+      id:
+        title: 'Id'
+        type: integer
+        example: 1
       name:
         title: 'Name'
         type: string
@@ -120,16 +170,20 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/User'
-#      comments:
-#        title: 'Comments'
-#        type: array
-#        items:
-#          $ref: '#/definitions/Comment'
+      comments:
+        title: 'Comments'
+        type: array
+        items:
+          $ref: '#/definitions/Comment'
 
   User:
     title: 'User'
     type: object
     properties:
+      id:
+        title: 'Id'
+        type: integer
+        example: 1
       fullName:
         title: 'FullName'
         type: string
@@ -154,32 +208,36 @@ definitions:
         title: 'CreatedAt'
         type: string
         format: 'date-time'
-#      comments:
-#        title: 'Comments'
-#        type: array
-#        items:
-#          $ref: '#/definitions/Comment'
+      comments:
+        title: 'Comments'
+        type: array
+        items:
+          $ref: '#/definitions/Comment'
     required:
       - fullName
       - email
       - username
 
-#  Comment:
-#    title: 'Comment'
-#    type: object
-#    properties:
-#      username:
-#        title: 'Username'
-#        type: string
-#        example: 'username'
-#      content:
-#        title: 'Content'
-#        type: string
-#        example: 'content'
-#      createdAt:
-#        title: 'CreatedAt'
-#        type: string
-#        format: 'date-time'
+  Comment:
+    title: 'Comment'
+    type: object
+    properties:
+      id:
+        title: 'Id'
+        type: integer
+        example: 1
+      username:
+        title: 'Username'
+        type: string
+        example: 'username'
+      content:
+        title: 'Content'
+        type: string
+        example: 'content'
+      createdAt:
+        title: 'CreatedAt'
+        type: string
+        format: 'date-time'
 
   AddTaskRequestBody:
     title: 'AddTaskRequestBody'
@@ -216,6 +274,48 @@ definitions:
 
   DeleteTaskConfirmation:
     title: 'DeleteTaskConfirmation'
+    type: object
+    properties:
+      message:
+        title: 'Message'
+        type: string
+
+  AddCommentRequestBody:
+    title: 'AddCommentRequestBody'
+    type: object
+    properties:
+      comment:
+        title: 'Comment'
+        type: object
+        $ref: '#/definitions/CommentBody'
+
+  CommentBody:
+    title: 'CommentBody'
+    type: object
+    properties:
+      taskId:
+        title: 'TaskId'
+        type: integer
+        example: 1
+      userId:
+        title: 'UserId'
+        type: integer
+        example: 1
+      content:
+        title: 'content'
+        type: string
+        example: 'content'
+
+  AddCommentConfirmation:
+    title: 'AddCommentConfirmation'
+    type: object
+    properties:
+      message:
+        title: 'Message'
+        type: string
+
+  DeleteCommentConfirmation:
+    title: 'DeleteCommentConfirmation'
     type: object
     properties:
       message:

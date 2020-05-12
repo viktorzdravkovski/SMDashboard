@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
  * Jpa Repository for {@link Comment}.
  */
 @Repository
-public interface CommentsRepository extends JpaRepository<Comment, Integer> {
+public interface CommentRepository extends JpaRepository<Comment, Integer> {
+
+  void deleteById(Integer id);
 }

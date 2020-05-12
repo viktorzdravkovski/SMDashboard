@@ -1,10 +1,15 @@
 package com.viktor.ttt.service.impl;
 
+import com.viktor.ttt.model.Comment;
 import com.viktor.ttt.model.User;
+import com.viktor.ttt.repository.CommentRepository;
 import com.viktor.ttt.repository.TaskRepository;
 import com.viktor.ttt.repository.UserRepository;
 import com.viktor.ttt.service.TaskTrackingService;
+import com.viktor.ttt.taskTracker.v1.model.AddCommentConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.AddTaskConfirmation;
+import com.viktor.ttt.taskTracker.v1.model.CommentBody;
+import com.viktor.ttt.taskTracker.v1.model.DeleteCommentConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.DeleteTaskConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.Task;
 import com.viktor.ttt.taskTracker.v1.model.TaskRequestBody;
@@ -22,15 +27,22 @@ public class TaskTrackingServiceImpl implements TaskTrackingService {
 
   private final TaskRepository taskRepository;
   private final UserRepository userRepository;
+  private final CommentRepository commentRepository;
 
   /**
-   * The constructor with mandatory parameter.
+   * The constructor with the mandatory parameters.
    *
-   * @param taskRepository the task repository.
+   * @param taskRepository    the task repository.
+   * @param userRepository    the user repository.
+   * @param commentRepository the comment repository.
    */
-  public TaskTrackingServiceImpl(TaskRepository taskRepository, UserRepository userRepository) {
+  public TaskTrackingServiceImpl(
+      TaskRepository taskRepository,
+      UserRepository userRepository,
+      CommentRepository commentRepository) {
     this.taskRepository = taskRepository;
     this.userRepository = userRepository;
+    this.commentRepository = commentRepository;
   }
 
   @Override
@@ -62,9 +74,9 @@ public class TaskTrackingServiceImpl implements TaskTrackingService {
 
     com.viktor.ttt.model.Task taskModel = TasksMapperFactory.mapTaskModelFromResource(task, allUsersByUsername);
     taskRepository.save(taskModel);
+
     AddTaskConfirmation addTaskConfirmation = new AddTaskConfirmation();
     addTaskConfirmation.setMessage("Task added successfully");
-
     return addTaskConfirmation;
   }
 
@@ -73,9 +85,40 @@ public class TaskTrackingServiceImpl implements TaskTrackingService {
 
     int taskId = Integer.parseInt(id);
     taskRepository.deleteById(taskId);
+
     DeleteTaskConfirmation deleteTaskConfirmation = new DeleteTaskConfirmation();
     deleteTaskConfirmation.setMessage("Task deleted successfully");
-
     return deleteTaskConfirmation;
+  }
+
+  @Override
+  public AddCommentConfirmation addComment(CommentBody commentBody) {
+
+    Integer taskId = commentBody.getTaskId();
+    com.viktor.ttt.model.Task task = taskRepository.getOne(taskId);
+    Integer userId = commentBody.getUserId();
+    User user = userRepository.getOne(userId);
+    String content = commentBody.getContent();
+
+    Comment comment = new Comment();
+    comment.setTask(task);
+    comment.setUser(user);
+    comment.setContent(content);
+    commentRepository.save(comment);
+
+    AddCommentConfirmation addCommentConfirmation = new AddCommentConfirmation();
+    addCommentConfirmation.setMessage("Added comment successfully");
+    return addCommentConfirmation;
+  }
+
+  @Override
+  public DeleteCommentConfirmation deleteComment(String id) {
+
+    int taskId = Integer.parseInt(id);
+    commentRepository.deleteById(taskId);
+
+    DeleteCommentConfirmation deleteCommentConfirmation = new DeleteCommentConfirmation();
+    deleteCommentConfirmation.setMessage("Comment deleted successfully");
+    return deleteCommentConfirmation;
   }
 }

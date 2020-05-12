@@ -1,6 +1,10 @@
 package com.viktor.ttt.service;
 
+import com.viktor.ttt.taskTracker.v1.model.AddCommentConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.AddTaskConfirmation;
+import com.viktor.ttt.taskTracker.v1.model.Comment;
+import com.viktor.ttt.taskTracker.v1.model.CommentBody;
+import com.viktor.ttt.taskTracker.v1.model.DeleteCommentConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.DeleteTaskConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.Task;
 import com.viktor.ttt.taskTracker.v1.model.TaskRequestBody;
@@ -42,4 +46,20 @@ public interface TaskTrackingService {
    * @return {@link DeleteTaskConfirmation}.
    */
   DeleteTaskConfirmation deleteTask(String id);
+
+  /**
+   * Adds a comment to the task.
+   *
+   * @param commentBody the {@link Comment}.
+   * @return {@link AddCommentConfirmation}.
+   */
+  AddCommentConfirmation addComment(CommentBody commentBody);
+
+  /**
+   * Deletes a comment by its id.
+   *
+   * @param id the id of the comment.
+   * @return {@link DeleteCommentConfirmation}.
+   */
+  DeleteCommentConfirmation deleteComment(String id);
 }

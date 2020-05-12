@@ -1,8 +1,13 @@
 package com.viktor.ttt.controller;
 
 import com.viktor.ttt.service.TaskTrackingService;
+import com.viktor.ttt.taskTracker.v1.model.AddCommentConfirmation;
+import com.viktor.ttt.taskTracker.v1.model.AddCommentRequestBody;
 import com.viktor.ttt.taskTracker.v1.model.AddTaskConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.AddTaskRequestBody;
+import com.viktor.ttt.taskTracker.v1.model.Comment;
+import com.viktor.ttt.taskTracker.v1.model.CommentBody;
+import com.viktor.ttt.taskTracker.v1.model.DeleteCommentConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.DeleteTaskConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.Task;
 import com.viktor.ttt.taskTracker.v1.model.TaskRequestBody;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -52,5 +58,18 @@ public class TaskTrackerController implements TaskTrackerApi {
   public ResponseEntity<DeleteTaskConfirmation> deleteTask(@PathVariable String id) {
     DeleteTaskConfirmation deleteTaskConfirmation = taskTrackingService.deleteTask(id);
     return ResponseEntity.ok(deleteTaskConfirmation);
+  }
+
+  @Override
+  public ResponseEntity<AddCommentConfirmation> addComment(@RequestBody AddCommentRequestBody body) {
+    CommentBody commentBody = body.getComment();
+    taskTrackingService.addComment(commentBody);
+    return null;
+  }
+
+  @Override
+  public ResponseEntity<DeleteCommentConfirmation> deleteComment(@PathVariable String id) {
+    DeleteCommentConfirmation deleteCommentConfirmation = taskTrackingService.deleteComment(id);
+    return ResponseEntity.ok(deleteCommentConfirmation);
   }
 }

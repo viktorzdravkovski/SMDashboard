@@ -1,0 +1,29 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="0010_01" author="viktor">
+        <insert tableName="COMMENT">
+            <column name="COMMENT_ID" value="1"/>
+            <column name="COMMENT_CONTENT" value="This is a test content for comments1."/>
+            <column name="FK_TASK_ID" value="1"/>
+            <column name="FK_USER_ID" value="1"/>
+        </insert>
+
+        <insert tableName="COMMENT">
+            <column name="COMMENT_ID" value="2"/>
+            <column name="COMMENT_CONTENT" value="This is a test content for comments2."/>
+            <column name="FK_TASK_ID" value="2"/>
+            <column name="FK_USER_ID" value="1"/>
+        </insert>
+
+        <insert tableName="COMMENT">
+            <column name="COMMENT_ID" value="3"/>
+            <column name="COMMENT_CONTENT" value="This is a test content for comments3."/>
+            <column name="FK_TASK_ID" value="2"/>
+            <column name="FK_USER_ID" value="2"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

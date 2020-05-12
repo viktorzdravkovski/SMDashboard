@@ -12,5 +12,7 @@
     <include context="default" relativeToChangelogFile="true" file="scripts/0006_create_table_task.xml"/>
     <include context="default" relativeToChangelogFile="true" file="scripts/0007_create_table_user_task.xml"/>
     <include context="default" relativeToChangelogFile="true" file="scripts/0008_insert_test_tasks.xml"/>
+    <include context="default" relativeToChangelogFile="true" file="scripts/0009_create_table_comment.xml"/>
+    <include context="default" relativeToChangelogFile="true" file="scripts/0010_insert_test_comments.xml"/>
 
 </databaseChangeLog>

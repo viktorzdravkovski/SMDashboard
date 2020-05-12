@@ -120,6 +120,11 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/User'
+#      comments:
+#        title: 'Comments'
+#        type: array
+#        items:
+#          $ref: '#/definitions/Comment'
 
   User:
     title: 'User'
@@ -149,10 +154,32 @@ definitions:
         title: 'CreatedAt'
         type: string
         format: 'date-time'
+#      comments:
+#        title: 'Comments'
+#        type: array
+#        items:
+#          $ref: '#/definitions/Comment'
     required:
       - fullName
       - email
       - username
+
+#  Comment:
+#    title: 'Comment'
+#    type: object
+#    properties:
+#      username:
+#        title: 'Username'
+#        type: string
+#        example: 'username'
+#      content:
+#        title: 'Content'
+#        type: string
+#        example: 'content'
+#      createdAt:
+#        title: 'CreatedAt'
+#        type: string
+#        format: 'date-time'
 
   AddTaskRequestBody:
     title: 'AddTaskRequestBody'

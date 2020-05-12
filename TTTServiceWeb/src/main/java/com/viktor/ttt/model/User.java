@@ -1,5 +1,7 @@
 package com.viktor.ttt.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -63,6 +66,14 @@ public class User {
       inverseJoinColumns = {@JoinColumn(name = "TASK_ID")}
   )
   public List<Task> tasks = new ArrayList<>();
+
+  @OneToMany(
+      targetEntity = Comment.class,
+      mappedBy = "user",
+      orphanRemoval = true,
+      cascade = CascadeType.ALL)
+  @Fetch(FetchMode.SUBSELECT)
+  private List<Comment> comments = new ArrayList<>();
 
   public Integer getId() {
     return id;
@@ -118,5 +129,13 @@ public class User {
 
   public void setTasks(List<Task> tasks) {
     this.tasks = tasks;
+  }
+
+  public List<Comment> getComments() {
+    return comments;
+  }
+
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
   }
 }

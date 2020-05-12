@@ -1,0 +1,12 @@
+com\viktor\ttt\taskTracker\v1\service\TaskTrackerApi.class
+com\viktor\ttt\taskTracker\v1\model\TaskRequestBody.class
+com\viktor\ttt\taskTracker\v1\model\User.class
+com\viktor\ttt\taskTracker\v1\service\AuthenticationApi.class
+com\viktor\ttt\taskTracker\v1\model\AddTaskConfirmation.class
+com\viktor\ttt\taskTracker\v1\model\Task.class
+com\viktor\ttt\taskTracker\v1\model\AddTaskRequestBody.class
+com\viktor\ttt\taskTracker\v1\model\RegistrationConfirmation.class
+com\viktor\ttt\taskTracker\v1\model\LoginUserRequestBody.class
+com\viktor\ttt\taskTracker\v1\model\DeleteTaskConfirmation.class
+com\viktor\ttt\taskTracker\v1\model\LoginConfirmation.class
+com\viktor\ttt\taskTracker\v1\model\RegisterUserRequestBody.class

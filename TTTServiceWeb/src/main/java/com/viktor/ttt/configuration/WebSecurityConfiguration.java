@@ -34,8 +34,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers("/api/v1/authenticate/register").permitAll()
         .antMatchers("/api/v1/authenticate/login").permitAll()
-        .antMatchers("/**").hasAnyAuthority("REGISTERED", "ADMIN");
-  }
+        .antMatchers("/**").permitAll();
+}
 
   @Override
   public void configure(WebSecurity web) throws Exception {

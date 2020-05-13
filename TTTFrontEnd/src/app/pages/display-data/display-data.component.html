@@ -1,0 +1,38 @@
+<h2 class="content-block">Tasks</h2>
+
+<dx-data-grid
+  class="dx-card wide-card"
+  [dataSource]="dataSource"
+  [showBorders]="true"
+  [columnAutoWidth]="true"
+  [rowAlternationEnabled]="true"
+  [columnHidingEnabled]="true"
+  [sorting]="true"
+  (onRowUpdated)="saveChanges($event)"
+  (onRowRemoved)="deleteTask($event)"
+>
+  <dxo-export [enabled]="true"></dxo-export>
+  <dxo-editing
+    [allowUpdating]="true"
+    [allowAdding]="true"
+    [allowDeleting]="true"
+    mode="popup"
+  >
+    <dxo-popup [showTitle]="true" title="Task Details"> </dxo-popup>
+    <!-- 'batch' | 'cell' | 'form' | 'popup' -->
+  </dxo-editing>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxi-column dataField="id"></dxi-column>
+  <dxi-column dataField="name"></dxi-column>
+  <dxi-column dataField="description"></dxi-column>
+  <dxi-column
+    dataField="assignedUsers"
+    [calculateCellValue]="renderUsers"
+  ></dxi-column>
+  <dxi-column
+    dataField="comments"
+    [calculateCellValue]="renderComments"
+  ></dxi-column>
+</dx-data-grid>

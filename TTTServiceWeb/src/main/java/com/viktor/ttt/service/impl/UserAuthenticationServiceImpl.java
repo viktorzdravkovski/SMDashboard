@@ -1,12 +1,12 @@
 package com.viktor.ttt.service.impl;
 
+import com.viktor.ttt.exception.UsernameAlreadyExistsException;
 import com.viktor.ttt.model.Role;
 import com.viktor.ttt.model.RoleType;
 import com.viktor.ttt.model.User;
 import com.viktor.ttt.repository.RoleRepository;
 import com.viktor.ttt.repository.UserRepository;
 import com.viktor.ttt.service.UserAuthenticationService;
-import com.viktor.ttt.exception.UsernameAlreadyExistsException;
 import com.viktor.ttt.taskTracker.v1.model.LoginConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.LoginUserRequestBody;
 import com.viktor.ttt.taskTracker.v1.model.RegisterUserRequestBody;
@@ -36,8 +36,8 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
   /**
    * The constructor with the mandatory parameters.
    *
-   * @param userRepository the user repository.
-   * @param roleRepository the role repository.
+   * @param userRepository        the user repository.
+   * @param roleRepository        the role repository.
    * @param authenticationManager the authentication manager.
    */
   public UserAuthenticationServiceImpl(

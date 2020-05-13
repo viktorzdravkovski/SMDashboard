@@ -1,0 +1,129 @@
+swagger: "2.0"
+info:
+  description: "API for Registering a new user and logging in an existing user."
+  version: "1.0.0"
+  title: "Authentication API"
+  contact:
+    email: "viktorzdravkovski995@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/api/v1"
+tags:
+  - name: "tttool"
+    description: "Everything about the task tracking tool"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /authenticate/register:
+    post:
+      tags:
+        - 'Authentication'
+      summary: 'Register a user'
+      description: 'Register a new user'
+      operationId: 'registerUser'
+      consumes:
+        - 'application/json'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterUserRequestBody'
+      responses:
+        200:
+          description: 'Status 200 - Response OK'
+          schema:
+            $ref: '#/definitions/RegistrationConfirmation'
+        403:
+          description: 'Status 403 - Access unauthorized'
+
+  /authenticate/login:
+    post:
+      tags:
+        - 'Authentication'
+      summary: 'User Login'
+      description: 'User Login'
+      operationId: 'loginUser'
+      consumes:
+        - 'application/json'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/LoginUserRequestBody'
+      responses:
+        200:
+          description: 'Status 200 - Response OK'
+          schema:
+            $ref: '#/definitions/LoginConfirmation'
+        403:
+          description: 'Status 403 - Access unauthorized'
+
+definitions:
+  RegisterUserRequestBody:
+    title: 'RegisterUserRequestBody'
+    type: object
+    properties:
+      firstName:
+        title: 'FirstName'
+        type: string
+        example: 'Test'
+      lastName:
+        title: 'LastName'
+        type: string
+        example: 'Testerson'
+      email:
+        title: 'Email'
+        type: string
+        example: 'test@test.com'
+      username:
+        title: 'Username'
+        type: string
+        example: 'test'
+      password:
+        title: 'Password'
+        type: string
+        example: 'password'
+
+  LoginUserRequestBody:
+    title: 'LoginUserRequestBody'
+    type: object
+    properties:
+      username:
+        title: 'Username'
+        type: string
+        example: 'username'
+      password:
+        title: 'Password'
+        type: string
+        example: 'password'
+
+  RegistrationConfirmation:
+    title: 'RegistrationConfirmation'
+    type: object
+    properties:
+      message:
+        title: 'Message'
+        type: string
+        example: 'A Message'
+      status:
+        title: 'Status'
+        type: integer
+        example: 200
+
+  LoginConfirmation:
+    title: 'LoginConfirmation'
+    type: object
+    properties:
+      message:
+        title: 'Message'
+        type: string
+        example: 'A Message'
+      status:
+        title: 'Status'
+        type: integer
+        example: 200

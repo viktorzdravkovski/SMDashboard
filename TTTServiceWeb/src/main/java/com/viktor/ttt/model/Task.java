@@ -50,7 +50,7 @@ public class Task {
       targetEntity = Comment.class,
       mappedBy = "task",
       orphanRemoval = true,
-      cascade = CascadeType.ALL)
+      cascade = CascadeType.REMOVE)
   @Fetch(FetchMode.SUBSELECT)
   private List<Comment> comments = new ArrayList<>();
 

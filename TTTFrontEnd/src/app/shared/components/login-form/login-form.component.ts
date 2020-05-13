@@ -7,6 +7,7 @@ import { DxCheckBoxModule } from 'devextreme-angular/ui/check-box';
 import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
 import { DxValidatorModule } from 'devextreme-angular/ui/validator';
 import { DxValidationGroupModule } from 'devextreme-angular/ui/validation-group';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -31,7 +32,11 @@ export class LoginFormComponent {
     if (!args.validationGroup.validate().isValid) {
       return;
     }
-
+    console.log(args);
+    const formGroup = new FormGroup({
+      username: new FormControl(this.login),
+      password: new FormControl(this.password)
+    });
     this.authService.logIn(this.login, this.password);
     args.validationGroup.reset();
   }

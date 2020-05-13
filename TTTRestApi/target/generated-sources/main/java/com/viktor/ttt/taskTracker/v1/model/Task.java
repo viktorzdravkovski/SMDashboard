@@ -3,6 +3,7 @@ package com.viktor.ttt.taskTracker.v1.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.viktor.ttt.taskTracker.v1.model.Comment;
 import com.viktor.ttt.taskTracker.v1.model.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,9 +17,12 @@ import javax.validation.constraints.*;
  * Task
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-11T21:42:21.707+02:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-13T14:00:57.614+02:00")
 
 public class Task   {
+  @JsonProperty("id")
+  private Integer id = null;
+
   @JsonProperty("name")
   private String name = null;
 
@@ -28,6 +32,30 @@ public class Task   {
   @JsonProperty("assignedUsers")
   @Valid
   private List<User> assignedUsers = null;
+
+  @JsonProperty("comments")
+  @Valid
+  private List<Comment> comments = null;
+
+  public Task id(Integer id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Get id
+   * @return id
+  **/
+  @ApiModelProperty(example = "1", value = "")
+
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
   public Task name(String name) {
     this.name = name;
@@ -98,6 +126,35 @@ public class Task   {
     this.assignedUsers = assignedUsers;
   }
 
+  public Task comments(List<Comment> comments) {
+    this.comments = comments;
+    return this;
+  }
+
+  public Task addCommentsItem(Comment commentsItem) {
+    if (this.comments == null) {
+      this.comments = new ArrayList<>();
+    }
+    this.comments.add(commentsItem);
+    return this;
+  }
+
+  /**
+   * Get comments
+   * @return comments
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public List<Comment> getComments() {
+    return comments;
+  }
+
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -108,14 +165,16 @@ public class Task   {
       return false;
     }
     Task task = (Task) o;
-    return Objects.equals(this.name, task.name) &&
+    return Objects.equals(this.id, task.id) &&
+        Objects.equals(this.name, task.name) &&
         Objects.equals(this.description, task.description) &&
-        Objects.equals(this.assignedUsers, task.assignedUsers);
+        Objects.equals(this.assignedUsers, task.assignedUsers) &&
+        Objects.equals(this.comments, task.comments);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, assignedUsers);
+    return Objects.hash(id, name, description, assignedUsers, comments);
   }
 
   @Override
@@ -123,9 +182,11 @@ public class Task   {
     StringBuilder sb = new StringBuilder();
     sb.append("class Task {\n");
     
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    assignedUsers: ").append(toIndentedString(assignedUsers)).append("\n");
+    sb.append("    comments: ").append(toIndentedString(comments)).append("\n");
     sb.append("}");
     return sb.toString();
   }

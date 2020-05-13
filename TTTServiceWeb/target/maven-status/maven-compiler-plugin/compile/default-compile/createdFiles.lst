@@ -1,14 +1,15 @@
 com\viktor\ttt\configuration\SwaggerConfiguration.class
-com\viktor\ttt\dto\UserDto.class
+com\viktor\ttt\controller\UiController.class
 com\viktor\ttt\repository\RoleRepository.class
+com\viktor\ttt\service\UserInformationService.class
 com\viktor\ttt\Application.class
-com\viktor\ttt\dto\UserLoginDto.class
 com\viktor\ttt\repository\RepositoryMarkerInterface.class
 com\viktor\ttt\service\impl\UserDetailsServiceImpl.class
 com\viktor\ttt\util\TasksMapperFactory.class
 com\viktor\ttt\controller\UserAuthenticationController.class
 com\viktor\ttt\controller\TestController.class
 com\viktor\ttt\configuration\CorsLocalConfiguration.class
+com\viktor\ttt\repository\CommentRepository.class
 com\viktor\ttt\util\UserMapperFactory.class
 com\viktor\ttt\model\UserDetails.class
 com\viktor\ttt\repository\TaskRepository.class
@@ -23,6 +24,9 @@ com\viktor\ttt\exception\UsernameAlreadyExistsException.class
 com\viktor\ttt\service\UserAuthenticationService.class
 com\viktor\ttt\repository\UserRepository.class
 com\viktor\ttt\service\impl\TaskTrackingServiceImpl.class
+com\viktor\ttt\controller\UserInformationController.class
+com\viktor\ttt\model\Comment.class
 com\viktor\ttt\model\RoleType.class
+com\viktor\ttt\service\impl\UserInformationServiceImpl.class
 com\viktor\ttt\exception\RestResponseEntityExceptionHandler.class
 com\viktor\ttt\model\Role.class

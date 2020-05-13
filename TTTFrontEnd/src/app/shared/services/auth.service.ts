@@ -16,13 +16,16 @@ export class AuthService {
     this.loggedIn = localStorage.getItem('active-user');
   }
 
-  logIn(login: string, password: string) {
+  logIn(login, password) {
     this.swaggerAuth.loginUser({ username: login, password }).subscribe(
       res => {
+        console.log(res);
         this.loggedIn = 'true';
         this.router.navigate(['/']);
         notify('Logged in!', 'success', 1600);
-
+        this.http.get('http://localhost:8080/user').subscribe(res => {
+          console.log(res);
+        });
         localStorage.setItem('active-user', 'true');
       },
       errorRes => {
@@ -30,6 +33,9 @@ export class AuthService {
       }
     );
     // this.router.navigate(['/']);
+    // this.http.post('http://localhost:8080/login', form.value).subscribe(res => {
+    //   console.log(res);
+    // });
   }
 
   register(

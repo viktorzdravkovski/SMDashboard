@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * AddTaskConfirmation
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-11T21:42:21.707+02:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-13T14:00:57.614+02:00")
 
 public class AddTaskConfirmation   {
   @JsonProperty("message")

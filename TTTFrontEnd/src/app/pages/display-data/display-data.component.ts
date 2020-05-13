@@ -23,6 +23,7 @@ export class DisplayDataComponent implements OnInit {
   }
 
   renderUsers(rowData) {
+    console.log(rowData);
     if (!rowData.assignedUsers) {
       return;
     }
@@ -30,6 +31,7 @@ export class DisplayDataComponent implements OnInit {
   }
 
   renderComments(rowData) {
+    console.log(rowData);
     if (!rowData.comments) {
       return;
     }

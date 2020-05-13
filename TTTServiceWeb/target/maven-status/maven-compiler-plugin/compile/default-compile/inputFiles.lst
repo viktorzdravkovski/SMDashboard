@@ -1,5 +1,7 @@
+D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\service\UserInformationService.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\model\User.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\service\impl\TaskTrackingServiceImpl.java
+D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\controller\UiController.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\resource\UserDetailsResource.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\service\UserAuthenticationService.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\model\RoleType.java
@@ -10,8 +12,11 @@ D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\e
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\Application.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\controller\TestController.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\configuration\CorsLocalConfiguration.java
+D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\repository\CommentRepository.java
+D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\controller\UserInformationController.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\model\Task.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\repository\TaskRepository.java
+D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\service\impl\UserInformationServiceImpl.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\util\TasksMapperFactory.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\configuration\WebSecurityConfiguration.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\repository\RepositoryMarkerInterface.java
@@ -19,10 +24,9 @@ D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\c
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\exception\RestResponseEntityExceptionHandler.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\model\Role.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\service\TaskTrackingService.java
-D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\dto\UserLoginDto.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\service\impl\UserAuthenticationServiceImpl.java
+D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\model\Comment.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\service\impl\UserDetailsServiceImpl.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\repository\UserRepository.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\configuration\SwaggerConfiguration.java
 D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\util\UserMapperFactory.java
-D:\WorkSpace\FINKI\TaskTrackingTool\TTTServiceWeb\src\main\java\com\viktor\ttt\dto\UserDto.java

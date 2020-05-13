@@ -5,8 +5,11 @@
  */
 package com.viktor.ttt.taskTracker.v1.service;
 
+import com.viktor.ttt.taskTracker.v1.model.AddCommentConfirmation;
+import com.viktor.ttt.taskTracker.v1.model.AddCommentRequestBody;
 import com.viktor.ttt.taskTracker.v1.model.AddTaskConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.AddTaskRequestBody;
+import com.viktor.ttt.taskTracker.v1.model.DeleteCommentConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.DeleteTaskConfirmation;
 import com.viktor.ttt.taskTracker.v1.model.Task;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +34,7 @@ import javax.validation.constraints.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-11T21:42:21.707+02:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-13T14:00:57.614+02:00")
 
 @Api(value = "TaskTracker", description = "the TaskTracker API")
 @RequestMapping(value = "/api/v1")
@@ -51,6 +54,30 @@ public interface TaskTrackerApi {
         return getRequest().map(r -> r.getHeader("Accept"));
     }
 
+    @ApiOperation(value = "Add a comment", nickname = "addComment", notes = "Add a comment", response = AddCommentConfirmation.class, tags={ "TaskTracker", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Status 200 - Response OK", response = AddCommentConfirmation.class),
+        @ApiResponse(code = 403, message = "Status 403 - Access forbidden") })
+    @RequestMapping(value = "/task-tracker/comment",
+        produces = { "application/json" }, 
+        method = RequestMethod.POST)
+    default ResponseEntity<AddCommentConfirmation> addComment(@ApiParam(value = "" ,required=true )  @Valid @RequestBody AddCommentRequestBody body) {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+            if (getAcceptHeader().get().contains("application/json")) {
+                try {
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"message\" : \"message\"}", AddCommentConfirmation.class), HttpStatus.NOT_IMPLEMENTED);
+                } catch (IOException e) {
+                    log.error("Couldn't serialize response for content type application/json", e);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default TaskTrackerApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
     @ApiOperation(value = "Add a task", nickname = "addTask", notes = "Add a new task in database", response = AddTaskConfirmation.class, tags={ "TaskTracker", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Status 200 - Response OK", response = AddTaskConfirmation.class),
@@ -63,6 +90,30 @@ public interface TaskTrackerApi {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
                     return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"message\" : \"message\"}", AddTaskConfirmation.class), HttpStatus.NOT_IMPLEMENTED);
+                } catch (IOException e) {
+                    log.error("Couldn't serialize response for content type application/json", e);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default TaskTrackerApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
+    @ApiOperation(value = "Delete a comment", nickname = "deleteComment", notes = "Delete a comment", response = DeleteCommentConfirmation.class, tags={ "TaskTracker", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Status 200 - Response OK", response = DeleteCommentConfirmation.class),
+        @ApiResponse(code = 403, message = "Status 403 - Access forbidden") })
+    @RequestMapping(value = "/task-tracker/comment/{id}",
+        produces = { "application/json" }, 
+        method = RequestMethod.DELETE)
+    default ResponseEntity<DeleteCommentConfirmation> deleteComment(@ApiParam(value = "id of comment",required=true) @PathVariable("id") String id) {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+            if (getAcceptHeader().get().contains("application/json")) {
+                try {
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"message\" : \"message\"}", DeleteCommentConfirmation.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -110,7 +161,7 @@ public interface TaskTrackerApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"name\" : \"Task\",  \"description\" : \"This is some description for the task\",  \"assignedUsers\" : [ {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  }, {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  } ]}", Task.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"comments\" : [ {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"id\" : 1,    \"content\" : \"content\",    \"username\" : \"username\"  }, {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"id\" : 1,    \"content\" : \"content\",    \"username\" : \"username\"  } ],  \"name\" : \"Task\",  \"description\" : \"This is some description for the task\",  \"id\" : 1,  \"assignedUsers\" : [ {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"comments\" : [ {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    }, {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    } ],    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"id\" : 1,    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  }, {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"comments\" : [ {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    }, {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    } ],    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"id\" : 1,    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  } ]}", Task.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -134,7 +185,7 @@ public interface TaskTrackerApi {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"name\" : \"Task\",  \"description\" : \"This is some description for the task\",  \"assignedUsers\" : [ {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  }, {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  } ]}, {  \"name\" : \"Task\",  \"description\" : \"This is some description for the task\",  \"assignedUsers\" : [ {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  }, {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  } ]} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"comments\" : [ {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"id\" : 1,    \"content\" : \"content\",    \"username\" : \"username\"  }, {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"id\" : 1,    \"content\" : \"content\",    \"username\" : \"username\"  } ],  \"name\" : \"Task\",  \"description\" : \"This is some description for the task\",  \"id\" : 1,  \"assignedUsers\" : [ {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"comments\" : [ {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    }, {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    } ],    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"id\" : 1,    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  }, {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"comments\" : [ {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    }, {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    } ],    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"id\" : 1,    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  } ]}, {  \"comments\" : [ {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"id\" : 1,    \"content\" : \"content\",    \"username\" : \"username\"  }, {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"id\" : 1,    \"content\" : \"content\",    \"username\" : \"username\"  } ],  \"name\" : \"Task\",  \"description\" : \"This is some description for the task\",  \"id\" : 1,  \"assignedUsers\" : [ {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"comments\" : [ {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    }, {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    } ],    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"id\" : 1,    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  }, {    \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",    \"address\" : \"Wall St.\",    \"comments\" : [ {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    }, {      \"createdAt\" : \"2000-01-23T04:56:07.000+00:00\",      \"id\" : 1,      \"content\" : \"content\",      \"username\" : \"username\"    } ],    \"fullName\" : \"Full Name\",    \"dateOfBirth\" : \"2000-01-23\",    \"id\" : 1,    \"email\" : \"example@example.com\",    \"username\" : \"userName\"  } ]} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

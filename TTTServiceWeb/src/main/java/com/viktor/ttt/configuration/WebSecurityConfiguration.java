@@ -34,13 +34,22 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers("/api/v1/authenticate/register").permitAll()
         .antMatchers("/api/v1/authenticate/login").permitAll()
+        .antMatchers("/swagger-ui.html**").permitAll()
         .antMatchers("/**").hasAnyAuthority("REGISTERED", "ADMIN");
   }
 
   @Override
   public void configure(WebSecurity web) throws Exception {
     web.ignoring()
-        .antMatchers("/h2-console/**");
+        .antMatchers("/h2-console/**")
+        .antMatchers(
+            "/v2/api-docs",
+            "/configuration/ui",
+            "/swagger-resources/**",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**"
+        );
   }
 
   @Bean

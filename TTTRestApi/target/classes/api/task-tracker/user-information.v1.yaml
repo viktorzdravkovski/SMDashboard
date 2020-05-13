@@ -1,0 +1,61 @@
+swagger: "2.0"
+info:
+  description: "API for showing information about the users."
+  version: "1.0.0"
+  title: "TaskTrackingTool API"
+  contact:
+    email: "viktorzdravkovski995@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/api/v1"
+tags:
+  - name: "tttool"
+    description: "Everything about the task tracking tool"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /user/current-user:
+    get:
+      tags:
+        - 'UserInformation'
+      summary: 'Get the current logged in user.'
+      description: 'Get the current logged in user.'
+      operationId: 'getCurrentUser'
+      produces:
+        - 'application/json'
+      parameters: []
+      responses:
+        200:
+          description: 'Status 200 - Response OK'
+          schema:
+            $ref: '#/definitions/CurrentUserResponse'
+        405:
+          description: 'Invalid input'
+
+definitions:
+  CurrentUserResponse:
+    title: 'CurrentUserResponse'
+    type: object
+    properties:
+      username:
+        title: 'Username'
+        type: string
+        example: 'username'
+      fullName:
+        title: 'FullName'
+        type: string
+        example: 'Full Name'
+      email:
+        title: 'Email'
+        type: string
+        example: 'email'
+      roles:
+        title: 'Roles'
+        type: 'array'
+        items:
+          title: 'Role'
+          type: string
+          example: 'REGISTERED'

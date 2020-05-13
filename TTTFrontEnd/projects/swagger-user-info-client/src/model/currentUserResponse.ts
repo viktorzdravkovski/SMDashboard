@@ -1,6 +1,6 @@
 /**
  * TaskTrackingTool API
- * API for Fetching, Saving, Updating and Deleting tasks
+ * API for showing information about the users.
  *
  * OpenAPI spec version: 1.0.0
  * Contact: viktorzdravkovski995@gmail.com
@@ -9,14 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Comment } from './comment';
-import { User } from './user';
 
 
-export interface Task { 
-    id?: number;
-    name?: string;
-    description?: string;
-    assignedUsers?: Array<User>;
-    comments?: Array<Comment>;
+export interface CurrentUserResponse { 
+    username?: string;
+    fullName?: string;
+    email?: string;
+    roles?: Array<string>;
 }

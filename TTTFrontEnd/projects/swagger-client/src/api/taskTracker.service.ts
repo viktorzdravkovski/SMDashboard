@@ -23,8 +23,11 @@ import { CustomHttpUrlEncodingCodec } from '../encoder';
 
 import { Observable } from 'rxjs';
 
+import { AddCommentConfirmation } from '../model/addCommentConfirmation';
+import { AddCommentRequestBody } from '../model/addCommentRequestBody';
 import { AddTaskConfirmation } from '../model/addTaskConfirmation';
 import { AddTaskRequestBody } from '../model/addTaskRequestBody';
+import { DeleteCommentConfirmation } from '../model/deleteCommentConfirmation';
 import { DeleteTaskConfirmation } from '../model/deleteTaskConfirmation';
 import { Task } from '../model/task';
 
@@ -63,6 +66,71 @@ export class TaskTrackerService {
       }
     }
     return false;
+  }
+
+  /**
+   * Add a comment
+   * Add a comment
+   * @param body
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public addComment(
+    body: AddCommentRequestBody,
+    observe?: 'body',
+    reportProgress?: boolean
+  ): Observable<AddCommentConfirmation>;
+  public addComment(
+    body: AddCommentRequestBody,
+    observe?: 'response',
+    reportProgress?: boolean
+  ): Observable<HttpResponse<AddCommentConfirmation>>;
+  public addComment(
+    body: AddCommentRequestBody,
+    observe?: 'events',
+    reportProgress?: boolean
+  ): Observable<HttpEvent<AddCommentConfirmation>>;
+  public addComment(
+    body: AddCommentRequestBody,
+    observe: any = 'body',
+    reportProgress: boolean = false
+  ): Observable<any> {
+    if (body === null || body === undefined) {
+      throw new Error(
+        'Required parameter body was null or undefined when calling addComment.'
+      );
+    }
+
+    let headers = this.defaultHeaders;
+
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = ['application/json'];
+    const httpHeaderAcceptSelected:
+      | string
+      | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    }
+
+    // to determine the Content-Type header
+    const consumes: string[] = [];
+    const httpContentTypeSelected:
+      | string
+      | undefined = this.configuration.selectHeaderContentType(consumes);
+    if (httpContentTypeSelected != undefined) {
+      headers = headers.set('Content-Type', httpContentTypeSelected);
+    }
+
+    return this.httpClient.post<AddCommentConfirmation>(
+      `${this.basePath}/task-tracker/comment`,
+      body,
+      {
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: observe,
+        reportProgress: reportProgress
+      }
+    );
   }
 
   /**
@@ -121,6 +189,64 @@ export class TaskTrackerService {
     return this.httpClient.post<AddTaskConfirmation>(
       `${this.basePath}/task-tracker/task`,
       body,
+      {
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: observe,
+        reportProgress: reportProgress
+      }
+    );
+  }
+
+  /**
+   * Delete a comment
+   * Delete a comment
+   * @param id id of comment
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public deleteComment(
+    id: string,
+    observe?: 'body',
+    reportProgress?: boolean
+  ): Observable<DeleteCommentConfirmation>;
+  public deleteComment(
+    id: string,
+    observe?: 'response',
+    reportProgress?: boolean
+  ): Observable<HttpResponse<DeleteCommentConfirmation>>;
+  public deleteComment(
+    id: string,
+    observe?: 'events',
+    reportProgress?: boolean
+  ): Observable<HttpEvent<DeleteCommentConfirmation>>;
+  public deleteComment(
+    id: string,
+    observe: any = 'body',
+    reportProgress: boolean = false
+  ): Observable<any> {
+    if (id === null || id === undefined) {
+      throw new Error(
+        'Required parameter id was null or undefined when calling deleteComment.'
+      );
+    }
+
+    let headers = this.defaultHeaders;
+
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = ['application/json'];
+    const httpHeaderAcceptSelected:
+      | string
+      | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    }
+
+    // to determine the Content-Type header
+    const consumes: string[] = [];
+
+    return this.httpClient.delete<DeleteCommentConfirmation>(
+      `${this.basePath}/task-tracker/comment/${encodeURIComponent(String(id))}`,
       {
         withCredentials: this.configuration.withCredentials,
         headers: headers,

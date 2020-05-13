@@ -9,16 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Comment } from './comment';
+import { CommentBody } from './commentBody';
 
 
-export interface User { 
-    id?: number;
-    fullName: string;
-    email: string;
-    username: string;
-    address?: string;
-    dateOfBirth?: string;
-    createdAt?: Date;
-    comments?: Array<Comment>;
+export interface AddCommentRequestBody { 
+    comment?: CommentBody;
 }

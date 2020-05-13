@@ -11,6 +11,7 @@ import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { AppRoutingModule } from './app-routing.module';
 import { ApiModule } from 'swagger-client';
 import { ApiModule as AuthModule } from 'swagger-auth-client';
+import { ApiModule as UserInfoModule } from 'swagger-user-info-client';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     AppRoutingModule,
     ApiModule,
-    AuthModule
+    AuthModule,
+    UserInfoModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]

@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "build-themes": "devextreme build",
     "postinstall": "npm run build-themes",
-    "vixa": "npm install && ng build swagger-client && ng build swagger-auth-client && ng build "
+    "vixa": "npm install && ng build swagger-client && ng build swagger-auth-client && ng build swagger-user-info-client && ng build "
   },
   "private": true,
   "dependencies": {

@@ -219,6 +219,46 @@
           }
         }
       }
+    },
+    "swagger-user-info-client": {
+      "projectType": "library",
+      "root": "projects/swagger-user-info-client",
+      "sourceRoot": "projects/swagger-user-info-client/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/swagger-user-info-client/tsconfig.lib.json",
+            "project": "projects/swagger-user-info-client/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/swagger-user-info-client/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/swagger-user-info-client/src/test.ts",
+            "tsConfig": "projects/swagger-user-info-client/tsconfig.spec.json",
+            "karmaConfig": "projects/swagger-user-info-client/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/swagger-user-info-client/tsconfig.lib.json",
+              "projects/swagger-user-info-client/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ttt-angular-frontend",

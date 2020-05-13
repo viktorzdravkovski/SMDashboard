@@ -30,6 +30,10 @@
       ],
       "swagger-auth-client/*": [
         "dist/swagger-auth-client/*"
+      ],
+      "swagger-user-info-client": [
+        "dist/swagger-user-info-client/swagger-user-info-client",
+        "dist/swagger-user-info-client"
       ]
     }
   },

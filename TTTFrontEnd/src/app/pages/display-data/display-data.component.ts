@@ -29,6 +29,15 @@ export class DisplayDataComponent implements OnInit {
     return rowData.assignedUsers.map(user => '\n' + user.fullName);
   }
 
+  renderComments(rowData) {
+    if (!rowData.comments) {
+      return;
+    }
+    return rowData.comments.map(
+      comment => '\n' + comment.username + ': ' + comment.content
+    );
+  }
+
   saveChanges(rowData) {
     console.log(rowData);
     const task: AddTaskRequestBody = {
@@ -50,7 +59,7 @@ export class DisplayDataComponent implements OnInit {
   }
 
   deleteTask(rowData) {
-    this.taskService.deleteTask(rowData.data.id).subscribe(
+    this.taskService.deleteTask(rowData.data.id.toString()).subscribe(
       res => {
         notify('Task deleted.', 'success', 1600);
       },

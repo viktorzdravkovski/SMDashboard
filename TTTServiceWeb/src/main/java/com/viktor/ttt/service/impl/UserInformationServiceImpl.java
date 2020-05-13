@@ -26,7 +26,8 @@ public class UserInformationServiceImpl implements UserInformationService {
   /**
    * The constructor with the mandatory parameter.
    *
-   * @param userRepository the user repository.
+   * @param userRepository     the user repository.
+   * @param httpServletRequest the httpServletRequest.
    */
   public UserInformationServiceImpl(UserRepository userRepository, HttpServletRequest httpServletRequest) {
     this.userRepository = userRepository;

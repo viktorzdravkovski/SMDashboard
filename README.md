@@ -1,4 +1,4 @@
-# TaskTrackingToolhttps://github.com/viktorzdravkovski/TaskTrackingTool/edit/master/README.md
+# TaskTrackingTool
 A tool used for tracking tasks between users.
 
 # Виктор Здравковски 193292
